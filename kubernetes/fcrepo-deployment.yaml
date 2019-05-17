@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fcrepo5
+  name: fcrepo5
+  namespace: fcrepo
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: fcrepo5
+    spec:
+      volumes:
+      - name: fcrepo-data
+        persistentVolumeClaim:
+          claimName: fcrepo-pv-claim
+      containers:
+      - name: fcrepo5
+        volumeMounts:
+        - name: fcrepo-data
+          mountPath: "/mnt/fcrepo-data"
+        image: oliverar/fcrepo
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always

@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: fcrepo5-postgres
+  name: fcrepo5-postgres
+  namespace: fcrepo
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+       app: fcrepo5-postgres
+    spec:
+      volumes:
+      - name: fcrepo-pg-data
+        persistentVolumeClaim:
+          claimName: fcrepo-pg-pv-claim
+      containers:
+      - name: fcrepo-postgres
+        volumeMounts:
+        - name: fcrepo-pg-data
+          mountPath: "/var/lib/postgresql"
+        env:
+        - name: POSTGRES_DB
+          value: fcrepo
+        - name: POSTGRES_PASSWORD
+          value: fcrepoadminpw
+        - name: POSTGRES_USER
+          value: fcrepoadmin
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        image: postgres:9
+        ports:
+        - containerPort: 5432
+      restartPolicy: Always
