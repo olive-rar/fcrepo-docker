@@ -23,7 +23,10 @@ spec:
         volumeMounts:
         - name: fcrepo-data
           mountPath: "/mnt/fcrepo-data"
-        image: oliverar/fcrepo
+        image: oliverar/fcrepo:5.0.2
+        env:
+        - name: JAVA_OPTS
+          value: "-Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json -Dfcrepo.home=/mnt/fcrepo-data -Dfcrepo.audit.container=/mnt/audit -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=fcrepo-postgres.fcrepo -Dfcrepo.postgresql.port=5432"
         ports:
         - containerPort: 8080
       restartPolicy: Always

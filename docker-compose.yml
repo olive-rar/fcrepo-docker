@@ -19,7 +19,3 @@ services:
           - fcrepo
     ports:
       - 8080:8080
-
-
-
-
