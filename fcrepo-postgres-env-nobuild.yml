@@ -1,0 +1,29 @@
+version: "3.6"
+
+networks:
+  appnetwork:
+    driver: bridge
+
+services:
+  fcrepo:
+    container_name: fcrepo
+    image: oliverar/fcrepo:5.0.2
+    environment:
+      JAVA_OPTS: -Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json -Dfcrepo.home=/mnt/fcrepo-data -Dfcrepo.audit.container=/mnt/audit -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=fcrepo-postgres.fcrepo -Dfcrepo.postgresql.port=5432
+    ports:
+      - 8080:8080
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo
+  postgres:
+    container_name: postgres
+    image: postgres:9
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo-postgres.fcrepo
+    environment:
+      POSTGRES_USER: fcrepoadmin
+      POSTGRES_PASSWORD: fcrepoadminpw
+      POSTGRES_DB: fcrepo
