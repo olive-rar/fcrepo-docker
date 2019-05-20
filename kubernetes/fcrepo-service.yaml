@@ -4,7 +4,7 @@ metadata:
   name: fcrepo
   namespace: fcrepo
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: fcrepo
     port: 8080
