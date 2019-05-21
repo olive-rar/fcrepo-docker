@@ -1,34 +1,33 @@
 # Fedora Repository 5 Docker & Kubernetes
 
-Inspired by fcrepo4-labs/fcrepo4-docker
-
 ## Docker
 
-### Run Fedora
+### Docker image
+
+
+### Run Fedora Repository
 ```
 ### Start server
-docker-compose up -d
+docker-compose -f docker/docker-compose.yaml up -d
 
 ### Shutdown server
-docker-compose down
-```
-### Run Fedora with a MySQL database:
-```
-### Start server
-docker-compose -f fcrepo-mysql.yml up -d
-
-### Shutdown server
-docker-compose -f fcrepo-mysql.yml down
+docker-compose -f docker/docker-compose.yaml down
 ```
 ### Run Fedora with a PostgreSQL database:
 ```
 # Start server
-docker-compose -f fcrepo-postgres.yml up -d
+docker-compose -f docker/fcrepo-postgres.yml up -d
 
 # Shutdown server
-docker-compose -f fcrepo-postgres.yml down
+docker-compose -f docker/fcrepo-postgres.yml down
 ```
+### Run Fedora Repository with a MySQL database:
+```
+### Start server
+docker-compose -f docker/fcrepo-mysql.yml up -d
 
-Fedora [Dockerfile](docker/services/fcrepo/Dockerfile)
+### Shutdown server
+docker-compose -f docker/fcrepo-mysql.yml down
+```
 
 ## Kubernetes

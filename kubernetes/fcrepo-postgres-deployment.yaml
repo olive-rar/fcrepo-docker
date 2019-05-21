@@ -25,11 +25,20 @@ spec:
           mountPath: "/var/lib/postgresql"
         env:
         - name: POSTGRES_DB
-          value: fcrepo
-        - name: POSTGRES_PASSWORD
-          value: fcrepoadminpw
+          valueFrom:
+            secretKeyRef:
+              name: fcrepo5-pg-secret
+              key: POSTGRES_DB
         - name: POSTGRES_USER
-          value: fcrepoadmin
+          valueFrom:
+            secretKeyRef:
+              name: fcrepo5-pg-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: fcrepo5-pg-secret
+              key: POSTGRES_PASSWORD
         - name: PGDATA
           value: /var/lib/postgresql/data/pgdata
         image: postgres:9
