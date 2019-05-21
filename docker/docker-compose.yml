@@ -1,0 +1,20 @@
+version: "3.6"
+
+networks:
+  appnetwork:
+    driver: bridge
+
+services:
+  fcrepo:
+    container_name: fcrepo
+    build:
+      context: .
+      args:
+        FEDORA_TAG: 5.0.2
+    image: fcrepo
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo
+    ports:
+      - 8080:8080
