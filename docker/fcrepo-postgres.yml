@@ -8,13 +8,14 @@ services:
   fcrepo:
     container_name: fcrepo
     build:
-      context: .
-      depends_on: postgres
+      context: ..
       args:
         FEDORA_TAG: 5.0.2
         ModeshapeConfig: jdbc-postgresql
-        JAVA_OPTS: -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=fcrepo-postgres.fcrepo -Dfcrepo.postgresql.port=5432
+        JDBCConfig: -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=fcrepo-postgres.fcrepo -Dfcrepo.postgresql.port=5432
     image: fcrepo
+#    environment:
+#      JAVA_OPTS: -Dfcrepo.modeshape.configuration=classpath:/config/jdbc-postgresql/repository.json -Dfcrepo.home=/mnt/fcrepo-data -Dfcrepo.audit.container=/mnt/audit -Dfcrepo.postgresql.username=fcrepoadmin -Dfcrepo.postgresql.password=fcrepoadminpw -Dfcrepo.postgresql.host=fcrepo-postgres.fcrepo -Dfcrepo.postgresql.port=5432
     ports:
       - 8080:8080
     networks:
@@ -24,11 +25,11 @@ services:
   postgres:
     container_name: postgres
     image: postgres:9
-    networks:
-      appnetwork:
-        aliases:
-          - fcrepo-postgres.fcrepo
     environment:
       POSTGRES_USER: fcrepoadmin
       POSTGRES_PASSWORD: fcrepoadminpw
       POSTGRES_DB: fcrepo
+    networks:
+      appnetwork:
+        aliases:
+          - fcrepo-postgres.fcrepo

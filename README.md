@@ -15,18 +15,18 @@ docker-compose -f docker/docker-compose.yaml down
 ### Run Fedora with a PostgreSQL database:
 ```
 # Start server
-docker-compose -f docker/fcrepo-postgres.yml up -d
+docker-compose -f docker/fcrepo-postgres.yaml up -d
 
 # Shutdown server
-docker-compose -f docker/fcrepo-postgres.yml down
+docker-compose -f docker/fcrepo-postgres.yaml down
 ```
 ### Run Fedora Repository with a MySQL database:
 ```
 ### Start server
-docker-compose -f docker/fcrepo-mysql.yml up -d
+docker-compose -f docker/fcrepo-mysql.yaml up -d
 
 ### Shutdown server
-docker-compose -f docker/fcrepo-mysql.yml down
+docker-compose -f docker/fcrepo-mysql.yaml down
 ```
 
 ## Kubernetes

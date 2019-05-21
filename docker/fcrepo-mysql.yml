@@ -8,7 +8,7 @@ services:
   fcrepo:
     container_name: fcrepo
     build:
-      context: .
+      context: ..
       args:
         FEDORA_TAG: 5.0.2
         ModeshapeConfig: jdbc-mysql

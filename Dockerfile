@@ -6,7 +6,6 @@ RUN apt-get update && apt-get -y upgrade
 
 # Install Fedora Repository
 ARG FEDORA_TAG=5.0.2
-ARG JAVA_OPTS=
 ARG ModeshapeConfig=file-simple
 ARG JDBCConfig=
 ARG fcrepoDataDir=/mnt/fcrepo-data
@@ -15,7 +14,8 @@ ARG fcrepoIngestDir=/mnt/ingest
 
 ENV CATALINA_HOME="/usr/local/tomcat" \
     PATH="$CATALINA_HOME/bin:$PATH" \
-		JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/'$ModeshapeConfig'/repository.json -Dfcrepo.home='$fcrepoDataDir' -Dfcrepo.audit.container='$fcrepoAuditDir'"
+    JDBCConfig=$JDBCConfig \
+		JAVA_OPTS="$JDBCConfig -Dfcrepo.modeshape.configuration=classpath:/config/$ModeshapeConfig/repository.json -Dfcrepo.home=$fcrepoDataDir -Dfcrepo.audit.container=$fcrepoAuditDir"
 
 RUN mkdir $fcrepoIngestDir
 RUN mkdir $fcrepoAuditDir
