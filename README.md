@@ -2,9 +2,6 @@
 
 ## Docker
 
-### Docker image
-
-
 ### Run Fedora Repository
 ```
 ### Start server
@@ -31,3 +28,25 @@ docker-compose -f docker/fcrepo-mysql.yml down
 ```
 
 ## Kubernetes
+
+Fedora Repository with PostgreSQL in Kubernetes Cluster.
+
+### Create Namespace
+```
+kubectl create -f ./kubernetes/fcrepo-namespace.yaml
+```
+
+### Create PostgreSQL environment
+```
+kubectl create -f ./kubernetes/fcrepo-pg-pvc.yaml
+kubectl create -f ./kubernetes/fcrepo-postgres-secret.yaml
+kubectl create -f ./kubernetes/fcrepo-postgres-deployment.yaml
+kubectl create -f ./kubernetes/fcrepo-postgres-service.yaml
+```
+
+### Create Fedora environment
+```
+kubectl create -f ./kubernetes/fcrepo-pvc.yaml
+kubectl create -f ./kubernetes/fcrepo-deployment.yaml
+kubectl create -f ./kubernetes/fcrepo-service.yaml
+```

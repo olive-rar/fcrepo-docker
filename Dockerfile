@@ -8,7 +8,7 @@ ARG FEDORA_TAG=5.0.2
 
 ENV CATALINA_HOME="/usr/local/tomcat" \
     PATH="$CATALINA_HOME/bin:$PATH" \
-		JAVA_OPTS="-Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json -Dfcrepo.home=/mnt/fcrepo-data -Dfcrepo.audit.container=/mnt/audit"
+		JAVA_OPTS="$JAVA_OPTS -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json -Dfcrepo.home=/mnt/fcrepo-data -Dfcrepo.audit.container=/mnt/audit"
 
 RUN mkdir /mnt/ingest
 RUN mkdir /mnt/audit
